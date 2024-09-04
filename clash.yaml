@@ -84,6 +84,18 @@ proxy-providers:
 
 # [策略组]
 proxy-groups:
+  - name: "剩余流量"
+    type: url-test
+    lazy: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
+    timeout: 2000
+    max-failed-times: 3
+    filter: "剩余流量"
+    use: 
+      - shuijiao
+    url: "https://cp.cloudflare.com/generate_204"
+    interval: 1800
+
   - name: "手动选择"
     type: select
     lazy: true
