@@ -99,7 +99,7 @@ proxy-groups:
   - name: "手动选择"
     type: select
     lazy: true
-    icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/Static.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Area.png
     timeout: 2000
     max-failed-times: 3
     proxies: 
@@ -171,7 +171,7 @@ proxy-groups:
 
   - name: "黑白名单"
     type: select
-    icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/Final.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
     timeout: 2000
     max-failed-times: 3
     proxies: 
@@ -187,7 +187,7 @@ proxy-groups:
   - name: "自动选择"
     type: url-test
     lazy: true
-    icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/Available.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Speedtest.png
     timeout: 2000
     max-failed-times: 3
     use: 
