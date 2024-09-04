@@ -75,7 +75,7 @@ proxy-providers:
     type: http
     url: "" #***************************
     interval: 3600
-    path: ./Server/shuijiao.yaml
+    #path: ./Server/shuijiao.yaml
     health-check:
       enable: true
       url: https://cp.cloudflare.com/generate_204
