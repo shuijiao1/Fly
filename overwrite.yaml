@@ -1,0 +1,238 @@
+# 水饺自用clash-verge配置
+
+# [策略组]
+proxy-groups:
+
+  - name: "手动选择"
+    type: select
+    lazy: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Area.png
+    timeout: 2000
+    max-failed-times: 3
+    proxies: 
+      - DIRECT
+      - 自动选择
+      - 香港节点
+      - 台湾节点
+      - 日本节点
+      - 新加坡节点
+      - 美国节点
+
+  - name: "苹果服务"
+    type: select
+    icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/Apple-2.png
+    timeout: 2000
+    max-failed-times: 3
+    proxies: 
+      - DIRECT
+      - 手动选择
+      - 美国节点
+  
+
+  - name: "AI"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
+    timeout: 2000
+    max-failed-times: 3
+    proxies: 
+      - 手动选择
+      - 日本节点
+      - 美国节点
+
+
+  - name: "Google"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
+    timeout: 2000
+    max-failed-times: 3
+    proxies: 
+      - 手动选择
+      - 自动选择
+      - DIRECT
+      - 日本节点
+      - 美国节点
+      - 新加坡节点
+
+  - name: "Spotify"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
+    timeout: 2000
+    max-failed-times: 3
+    proxies: 
+      - 手动选择
+      - DIRECT
+      - 日本节点
+      - 美国节点
+
+  - name: "全球服务"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
+    timeout: 2000
+    max-failed-times: 3
+    proxies: 
+      - 手动选择
+      - 自动选择
+      - 日本节点
+      - 美国节点
+
+
+  - name: "黑白名单"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
+    timeout: 2000
+    max-failed-times: 3
+    proxies: 
+      - 手动选择
+      - 自动选择
+      - DIRECT
+      - 香港节点
+      - 台湾节点
+      - 日本节点
+      - 新加坡节点
+      - 美国节点
+
+  - name: "自动选择"
+    type: url-test
+    lazy: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
+    timeout: 2000
+    max-failed-times: 3
+    include-all: true
+    url: "https://cp.cloudflare.com/generate_204"
+    interval: 1800
+
+  - name: "香港节点"
+    type: url-test
+    lazy: true
+    icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/HK.png
+    timeout: 2000
+    max-failed-times: 3
+    filter: "香港|港|HK|🇭🇰|(?i)Hong"
+    include-all: true
+    url: "https://cp.cloudflare.com/generate_204"
+    interval: 1800
+
+  - name: "台湾节点"
+    type: url-test
+    lazy: true
+    icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/TW.png
+    timeout: 2000
+    max-failed-times: 3
+    filter: "台湾|台|TW|🇹🇼|(?i)Taiwan"
+    include-all: true
+    url: "https://cp.cloudflare.com/generate_204"
+    interval: 1800
+
+  - name: "日本节点"
+    type: url-test
+    lazy: true
+    icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/JP.png
+    timeout: 2000
+    max-failed-times: 3
+    filter: "日本|日|JP|🇯🇵|(?i)Japan"
+    include-all: true
+    url: "https://cp.cloudflare.com/generate_204"
+    interval: 1800
+
+  - name: "新加坡节点"
+    type: url-test
+    lazy: true
+    icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/SG.png
+    timeout: 2000
+    max-failed-times: 3
+    filter: "新加坡|狮|SG|🇸🇬|(?i)Singapore"
+    include-all: true
+    url: "https://cp.cloudflare.com/generate_204"
+    interval: 1800
+ 
+  - name: "美国节点"
+    type: url-test
+    lazy: true
+    icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/US.png
+    filter: "美国|美|US|🇺🇸|(?i)States"
+    timeout: 2000
+    max-failed-times: 3
+    include-all: true
+    url: "https://cp.cloudflare.com/generate_204"
+    interval: 1800
+
+# [本地规则]
+rules:
+  - RULE-SET,规则修正,DIRECT
+  - RULE-SET,OpenAI,AI
+  - RULE-SET,Claude,AI
+  - RULE-SET,Anthropic,AI
+  - RULE-SET,Google,Google
+  - RULE-SET,Spotify,Spotify
+  - RULE-SET,全球服务,全球服务  
+  - RULE-SET,直连,DIRECT
+  - GEOIP, CN, DIRECT
+  - MATCH,黑白名单
+
+# [远程规则]
+rule-providers:
+  规则修正:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./Ruleset/Unbreak.yaml
+    url: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Clash/Ruleset/Unbreak.yaml
+
+
+  OpenAI:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./OpenAI/OpenAI.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI_No_Resolve.yaml
+
+  Claude:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./Claude/Claude.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Claude/Claude_No_Resolve.yaml
+
+  Anthropic:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./Anthropic/Anthropic.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Anthropic/Anthropic_No_Resolve.yaml
+
+  Google:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./Google/Google.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google_No_Resolve.yaml
+
+  Spotify:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./Spotify/Spotify.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Spotify/Spotify_No_Resolve.yaml
+
+  全球服务:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./Global/Global.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Global/Global_Classical_No_Resolve.yaml
+
+
+  苹果服务:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./Apple/Apple_Classical.yaml
+    url: https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/Apple/Apple_Classical_No_Resolve.yaml
+
+
+  直连:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./Direct/Direct.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Direct/Direct_No_Resolve.yaml
