@@ -260,9 +260,7 @@ rules:
   - IP-CIDR, 192.168.0.0/16, DIRECT
   
   - RULE-SET,规则修正,DIRECT
-  - RULE-SET,OpenAI,AI
-  - RULE-SET,Claude,AI
-  - RULE-SET,Anthropic,AI
+  - RULE-SET,AI,AI
   - RULE-SET,bing,bing
   - RULE-SET,Google,Google
   - RULE-SET,Spotify,Spotify
