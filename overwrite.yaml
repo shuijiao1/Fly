@@ -193,26 +193,13 @@ rule-providers:
     url: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Clash/Ruleset/Unbreak.yaml
 
 
-  OpenAI:
+  AI:
     behavior: classical
     interval: 86400
     type: http
-    path: ./OpenAI/OpenAI.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI_No_Resolve.yaml
+    path: ./AI/AI.yaml
+    url: https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Clash/Rule/AI.yaml
 
-  Claude:
-    behavior: classical
-    interval: 86400
-    type: http
-    path: ./Claude/Claude.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Claude/Claude_No_Resolve.yaml
-
-  Anthropic:
-    behavior: classical
-    interval: 86400
-    type: http
-    path: ./Anthropic/Anthropic.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Anthropic/Anthropic_No_Resolve.yaml
 
   bing:
     behavior: classical
