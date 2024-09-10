@@ -158,6 +158,11 @@ proxy-groups:
 
 # [本地规则]
 rules:
+  - IP-CIDR, 10.0.0.0/8, DIRECT
+  - IP-CIDR, 127.0.0.0/8, DIRECT
+  - IP-CIDR, 172.16.0.0/12, DIRECT
+  - IP-CIDR, 192.168.0.0/16, DIRECT
+  
   - RULE-SET,规则修正,DIRECT
   - RULE-SET,OpenAI,AI
   - RULE-SET,Claude,AI
@@ -168,6 +173,7 @@ rules:
   - RULE-SET,直连,DIRECT
   - GEOIP, CN, DIRECT
   - MATCH,黑白名单
+  
 
 # [远程规则]
 rule-providers:
