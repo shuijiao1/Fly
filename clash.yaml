@@ -1,63 +1,83 @@
 # 水饺自用clash-verge配置
 
-redir-port: 7892      # Redir 端口
-mixed-port: 7893      # 混合端口 HTTP和SOCKS5用一个端口
-geodata-mode: true    #【Meta专属】使用geoip.dat数据库(默认：false使用mmdb数据库)
-tcp-concurrent: false #【Meta专属】TCP 并发连接所有 IP, 将使用最快握手的 TCP
-allow-lan: true       # 允许局域网的连接（可用来共享代理）
-bind-address: "*"     # 仅在将allow-lan设置为true时适用
-                      # #"*": 绑定所有IP地址
-find-process-mode: strict           #匹配所有进程（always/strict/off）
-ipv6: false           # 开启 IPv6 总开关，关闭阻断所有 IPv6 链接和屏蔽 DNS 请求 AAAA 记录
-mode: rule            # 规则模式：rule（规则） / global（全局代理）/ direct（全局直连）/ script (脚本)
-log-level: info       # 设置日志输出级别 (5 个级别：silent / error / warning / info / debug）
-external-controller: 0.0.0.0:9093   #外部控制器,可以使用 RESTful API 来控制你的 clash 内核
-global-client-fingerprint: chrome   #全局 TLS 指纹，优先低于 proxy 内的 client-fingerprint
-                                    #可选： "chrome","firefox","safari","ios","random","none" options.
+ort: 7890
+socks-port: 7891
+mixed-port: 7892
+redir-port: 7893
+tproxy-port: 7894
 
-geox-url:             #自定义 geodata url
-  mmdb: "https://raw.githubusercontent.com/Masaiki/GeoIP2-CN/release/Country.mmdb"
+unified-delay: true
+geodata-mode: false
+geodata-loader: standard
+geo-auto-update: true
+geo-update-interval: 24
+tcp-concurrent: true
+find-process-mode: strict
+global-client-fingerprint: chrome
+
+allow-lan: true
+mode: rule
+log-level: info
+ipv6: true
+udp: true
+
+external-controller: 0.0.0.0:9090
+# external-ui: ui
+# external-ui-url: 'https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip'
+
+geox-url:
+  # geoip: 'https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/geoip.dat'
+  # geosite: 'https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/geosite.dat'
+  mmdb: 'https://gitlab.com/Masaiki/GeoIP2-CN/-/raw/release/Country.mmdb'
+  asn: 'https://gitlab.com/Loon0x00/loon_data/-/raw/main/geo/GeoLite2-ASN.mmdb'
 
 profile:
-  store-selected: true # 存储 select 选择记录
-  store-fake-ip: true  # 持久化 fake-ip
-  
-sniffer:               # 嗅探域名 可选配置
+  store-selected: true
+  store-fake-ip: true
+
+sniffer:
   enable: true
-  parse-pure-ip: true  # 是否使用嗅探结果作为实际访问，默认 true
+  force-dns-mapping: true
+  parse-pure-ip: true
+  override-destination: true
   sniff:
-    TLS:               # TLS 默认嗅探 443
-      ports: [443, 8443]
     HTTP:
       ports: [80, 8080-8880]
       override-destination: true
-      
-tun:                   # Tun 配置
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  force-domain:
+    - +.v2ex.com
+
+  skip-domain:
+    - Mijia Cloud
+
+tun:
   enable: true
-  stack: system        # 可选： system/gvisor/lwip
-                       # tun模式堆栈,如无使用问题,建议使用 system 栈;
-                       # MacOS 用户推荐 gvisor栈,IOS无法使用system栈
-  dns-hijack:          # dns劫持,一般设置为 any:53 即可, 即劫持所有53端口的udp流量
-     - 'any:53'
-# strict_route: true   # 将所有连接路由到tun来防止泄漏，但你的设备将无法其他设备被访问
-  auto-route: true     # 自动设置全局路由，可以自动将全局流量路由进入tun网卡。
-  auto-detect-interface: true     # 自动识别出口网卡
-        
+  stack: system
+  dns-hijack:
+    - any:53
+  auto-route: true
+  auto-detect-interface: true
 
 dns:
-  enable: true             # 禁用系统 DNS
-  ipv6: false              # 关闭 IPv6
-  enhanced-mode: fake-ip   # 增强模式：redir-host或fake-ip
-  listen: 0.0.0.0:53       # DNS监听地址
-  fake-ip-range: 198.18.0.1/16    # Fake-IP解析地址池
-  # fake ip 白名单列表'以下地址不会下发fakeip映射用于连接 
-  fake-ip-filter: ['*.lan', 'cable.auth.com', '*.msftconnecttest.com', '*.msftncsi.com', 'network-test.debian.org', 'detectportal.firefox.com', 'resolver1.opendns.com', '*.srv.nintendo.net', '*.stun.playstation.net', 'xbox.*.microsoft.com', '*.xboxlive.com', 'stun.*', 'global.turn.twilio.com', 'global.stun.twilio.com', 'localhost.*.qq.com', 'localhost.*.weixin.qq.com', '*.logon.battlenet.com.cn', '*.logon.battle.net', '*.blzstatic.cn', 'music.163.com', '*.music.163.com', '*.126.net', 'musicapi.taihe.com', 'music.taihe.com', 'songsearch.kugou.com', 'trackercdn.kugou.com', '*.kuwo.cn', 'api-jooxtt.sanook.com', 'api.joox.com', 'joox.com', 'y.qq.com', '*.y.qq.com', 'streamoc.music.tc.qq.com', 'mobileoc.music.tc.qq.com', 'isure.stream.qqmusic.qq.com', 'dl.stream.qqmusic.qq.com', 'aqqmusic.tc.qq.com', 'amobile.music.tc.qq.com', '*.xiami.com', '*.music.migu.cn', 'music.migu.cn', 'proxy.golang.org', '*.mcdn.bilivideo.cn', '*.cmpassport.com', 'id6.me', 'open.e.189.cn', 'mdn.open.wo.cn', 'opencloud.wostore.cn', 'auth.wosms.cn', '*.jegotrip.com.cn', '*.icitymobile.mobi', '*.pingan.com.cn', '*.cmbchina.com', 'pool.ntp.org', '*.pool.ntp.org', 'ntp.*.com', 'time.*.com', 'ntp?.*.com', 'time?.*.com', 'time.*.gov', 'time.*.edu.cn', '*.ntp.org.cn', 'PDC._msDCS.*.*', 'DC._msDCS.*.*', 'GC._msDCS.*.*']
+  enable: true
+  listen: 0.0.0.0:1053
+  ipv6: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 28.0.0.1/8
+  fake-ip-filter:
+    - "*"
+    - +.lan
+  default-nameserver:
+    - 223.5.5.5
+    - 223.6.6.6
+  nameserver:
+    - https://223.5.5.5/dns-query#h3=true
+    - https://223.6.6.6/dns-query#h3=true
 
-  fallback-filter:   # 回退过滤器
-    geoip: true      # GEOIP 启用
-    geoip-code: CN   # GEOIP 编码
-    ipcidr:          # IPCIDR
-      - 240.0.0.0/4  
 # [代理订阅]
 proxy-providers:
   shuijiao:
