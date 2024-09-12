@@ -1,9 +1,13 @@
-allow-lan: true
-bind-address: "*"
 mode: rule
 log-level: info
 ipv6: false
 udp: true
+
+
+geox-url:
+  mmdb: 'https://gitlab.com/Masaiki/GeoIP2-CN/-/raw/release/Country.mmdb'
+  asn: 'https://gitlab.com/Loon0x00/loon_data/-/raw/main/geo/GeoLite2-ASN.mmdb'
+
 
 
 tun:
@@ -13,7 +17,6 @@ tun:
     - any:53
   auto-route: true
   auto-detect-interface: true
-
 
 dns:
   enable: true
