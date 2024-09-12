@@ -1,5 +1,3 @@
-
-
 allow-lan: true
 mode: rule
 log-level: info
