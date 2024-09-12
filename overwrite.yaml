@@ -7,8 +7,9 @@ udp: true
 geox-url:
   mmdb: 'https://gitlab.com/Masaiki/GeoIP2-CN/-/raw/release/Country.mmdb'
   asn: 'https://gitlab.com/Loon0x00/loon_data/-/raw/main/geo/GeoLite2-ASN.mmdb'
-
-
+  
+allow-lan: true # 允许局域网连接
+bind-address: "*" # 绑定 IP 地址，仅作用于 allow-lan 为 true，'*'表示所有地址
 
 tun:
   enable: true
