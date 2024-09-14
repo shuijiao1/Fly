@@ -1,4 +1,15 @@
+dns:
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+  proxy-server-nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
 
+    
 # [策略组]
 proxy-groups:
 
@@ -171,7 +182,6 @@ rules:
   - IP-CIDR, 172.16.0.0/12, DIRECT
 #  - IP-CIDR, 192.168.0.0/16, DIRECT
   
-  - RULE-SET,规则修正,DIRECT
   - RULE-SET,AI,AI
   - RULE-SET,微软服务,微软服务
   - RULE-SET,Google,Google
@@ -184,13 +194,6 @@ rules:
 
 # [远程规则]
 rule-providers:
-  规则修正:
-    behavior: classical
-    interval: 86400
-    type: http
-    path: ./Ruleset/Unbreak.yaml
-    url: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Clash/Ruleset/Unbreak.yaml
-
 
   AI:
     behavior: classical
