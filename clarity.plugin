@@ -1,0 +1,8 @@
+#!name=克拉壁纸会员
+
+[Script]
+# > 克拉壁纸解锁订阅
+http-response ^https?:\/\/buy\.itunes\.apple\.com\/verifyReceipt$ script-path=https://raw.githubusercontent.com/yqc007/QuantumultX/master/ClarityPaperProCrack.js, requires-body=true, timeout=60, tag=ClarityPaperProCrack
+
+[MITM]
+hostname = buy.itunes.apple.com
