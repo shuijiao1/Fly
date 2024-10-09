@@ -27,6 +27,7 @@ proxy-groups:
       - 日本节点
       - 新加坡节点
       - 美国节点
+      - 其他地区选择
 
   - name: "苹果服务"
     type: select
@@ -170,6 +171,17 @@ proxy-groups:
     lazy: true
     icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/US.png
     filter: "美国|美|US|🇺🇸|(?i)States"
+    timeout: 2000
+    max-failed-times: 3
+    include-all: true
+    url: "https://cp.cloudflare.com/generate_204"
+    interval: 1800
+
+  - name: "其他地区选择"
+    type: select
+    lazy: true
+    icon: http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/World_Map.png
+    filter: "^(?!.*(香港|HK|Hong Kong|HongKong|台湾|TW|Tai|日本|JP|Japan|美国|USA|US|United States|新加坡|狮城|SG|Singapore)).*"
     timeout: 2000
     max-failed-times: 3
     include-all: true
