@@ -28,7 +28,6 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
     proxies:
       - Flower
-      - ikuu
       - Final
 
   - name: "HK"
