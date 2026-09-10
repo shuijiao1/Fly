@@ -19,9 +19,9 @@ proxy-groups:
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
     proxies:
-      - US
       - SG
       - JP
+      - US
       
   - name: "Emby"
     type: fallback
